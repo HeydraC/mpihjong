@@ -1,9 +1,12 @@
 # mpihjong
 Evaluación del puntaje de mahjongs mediante algoritmos distribuidos
 
-Se ejecuta de forma
+Se ejecuta de forma:
+
 **mpirun -n <número de procesos> python mahjong.py <nombre del archivo>**
+
 Ejm:
+
 **mpirun -n 4 python mahjong.py manos_maestro.txt**
 
 Los grupos de 2, 3 o 4 elementos se guardan como la clase **musketeer** de forma:
