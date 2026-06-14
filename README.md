@@ -3,7 +3,7 @@ Evaluación del puntaje de mahjongs mediante algoritmos distribuidos
 
 Se ejecuta de forma:
 
-__mpirun -n <número de procesos> python mahjong.py [nombre del archivo]__
+__mpirun -n [número de procesos] python mahjong.py [nombre del archivo]__
 
 Ejm:
 
