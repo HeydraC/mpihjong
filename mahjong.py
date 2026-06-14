@@ -1,10 +1,10 @@
 #Grupos
 class musketeer:
     def __init__(self, Id: int, suit: str, variety: str, closed: bool):
-        self.Id = Id #Número menor en chows, número que se repite en los demás
-        self.suit = suit #Bolas, chinos, palos, vientos, etc.
-        self.variety = variety#Tipo de grupo (chow, pung, kung, ojo)
-        self.closed = closed#Abierto o cerrado
+        self.Id = Id #Número menor en chows, número que se repite en los demás (Para honores mayores es 0)
+        self.suit = suit #Bolas, chinos, palos, vientos, etc. (Para honores mayores es lo que sale en la entrada (E, GV,...))
+        self.variety = variety #Tipo de grupo (chow, pung, kung, ojo)
+        self.closed = closed #Abierto o cerrado
     
     #Para ordenar chows (Y lo demás seguramente)
     def __eq__(self, other):
