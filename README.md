@@ -13,4 +13,4 @@ Se dividen los bytes del archivo entre los procesos a ejecutar, cada proceso lee
 
 El proceso 0 toma el instante de inicio y de fin y reporta el tiempo de ejecución.
 
-Todos los procesos evalúan su pedazo de archivo y agrega los resultados a la lista **results**, el proceso 0 recopila las listas de todos los demás para imprimirlas.
+Todos los procesos evalúan su pedazo de archivo y agregan los resultados a la lista **results**, el proceso 0 recopila las listas de todos los demás para imprimirlas.
