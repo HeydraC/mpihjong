@@ -13,7 +13,7 @@ Los grupos de 2, 3 o 4 elementos se guardan como la clase **musketeer** de forma
 
 ```python
         self.Id = Id #Número menor en chows, número que se repite en los demás (Para honores mayores es 0)
-        self.suit = suit #Bolas, chinos, palos, vientos, etc. (Para honores mayores es lo que sale en la entrada (E, GV,...))
+        self.suit = suit #Bolas, chinos, palos, vientos, etc. (Para honores mayores es lo que sale en la entrada (E, DV,...))
         self.variety = variety #Tipo de grupo (chow, pung, kung, ojo)
         self.closed = closed #Abierto o cerrado
 ```
