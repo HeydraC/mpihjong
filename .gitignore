@@ -1,0 +1,10 @@
+#Entrono virtual
+venv/
+
+# Variables de entorno y credenciales
+.env
+.env.local
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
