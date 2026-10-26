@@ -85,6 +85,93 @@ import itertools
 import sys
 import os
 from datetime import datetime
+from collections import Counter
+
+def is_classic(line):
+    is_classic_bool = False
+
+    #Me quedo solo con la linea del mahjong clasico o limite
+    line_temp1, separador, line_temp2 = line.partition("]")
+    line_temp1, separador, line_temp2 = line_temp2.partition("<")
+    final_line = line_temp1
+
+    #diccionario que me indica cuantas veces se repite cada caracter
+    dic_char = Counter(final_line)
+    total_pts = 0
+    actions = []
+    mahjong_name = "TRADICIONAL"
+
+    #Verifico si es HIJOS DE LA NOCHE
+    if dic_char['('] == 7 and dic_char[')'] == 7:
+        if dic_char['C'] == 14 or dic_char['P'] == 14 or dic_char['B'] == 14:
+            if dic_char['1'] + dic_char['2'] + dic_char['3'] + dic_char['4'] + dic_char['5'] + dic_char['6'] + dic_char['7'] + dic_char['8'] + dic_char['9'] == 14:
+                total_pts = 7500
+                mahjong_name = "HIJOS DE LA NOCHE"
+                is_classic_bool = True
+
+    #GRAN SEGUIDILLA REAL
+    if dic_char['1'] == 1 and dic_char['2'] == 1 and dic_char['3'] == 1 and dic_char['4'] == 1 and dic_char['5'] == 1 and dic_char['6'] == 1 and dic_char['7'] == 1 and dic_char['8'] == 1 and dic_char['9'] == 1:
+        if dic_char['D'] == 3 and (dic_char['['] == 4 or dic_char['{'] == 4) and (dic_char['N'] == 2 or dic_char['W'] == 2 or dic_char['E'] == 2 or dic_char['S'] == 2):
+            if (dic_char['B'] == 9 or dic_char['B'] == 12 or dic_char['C'] == 9 or dic_char['P'] == 9) and dic_char['('] == 1:
+                if dic_char['{'] > 0:
+                    total_pts = 5000 
+                else:
+                    total_pts = 2500
+                mahjong_name = "GRAN SEGUIDILLA REAL"
+                is_classic_bool = True
+
+    #SIETE SAMURAIS
+    if dic_char['('] == 7: #Me asegura 7 pares
+        if dic_char['D'] + dic_char['N'] + dic_char['S'] + dic_char['E'] + dic_char['W'] + dic_char['1'] +  dic_char['9'] == 14: #Me dice que los pares son de honores ases o nueves
+            total_pts = 2500
+            mahjong_name = "SIETE SAMURAIS"
+            is_classic_bool = True
+
+    #ASES Y NUEVES
+    if dic_char['['] == 4 and dic_char['('] == 1:
+        if dic_char['1'] + dic_char['9'] == 14:
+            total_pts = 5000
+            mahjong_name = "ASES Y NUEVES"
+            is_classic_bool = True
+
+    #OCULTO
+    if dic_char['['] == 0: #Me garantiza que se hizo en oculto
+        pass
+
+    #JASPE IMPERIAL
+    if dic_char['P'] + dic_char['D'] == 14: #Me garntiza que son solo bambus y dragones
+        if dic_char['2'] + dic_char['3'] + dic_char['4'] + dic_char['6'] + dic_char['8'] + dic_char['V'] == 14: #Verfico si son solo verdes
+            total_pts = 5000
+            mahjong_name = "JASPE IMPERIAL"
+            is_classic_bool = True
+
+    #TIFON ORIENTAL
+    if dic_char['['] == 4 and dic_char['('] == 1:
+        if dic_char['D'] == 3 and (dic_char['N'] + dic_char['E'] + dic_char['W'] + dic_char['S'] == 11):
+            total_pts = 10000
+            mahjong_name = "TIFON ORIENTAL"
+            is_classic_bool = True
+
+    #ROSA DE LOS VIENTOS
+    if dic_char['['] == 4 and dic_char['('] == 1:
+        if dic_char['N'] + dic_char['E'] + dic_char['W'] + dic_char['S'] == 12:
+            total_pts = 10000
+            mahjong_name = "ROSA DE LOS VIENTOS"
+            is_classic_bool = True
+
+    #ARMONIA CELESTE
+    if dic_char['['] == 4 and dic_char['('] == 1: #4 pungs/chows y 1 ojo
+        if dic_char['D'] == 9:
+            if dic_char['N'] == 3 or dic_char['S'] == 3 or dic_char['E'] == 3 or dic_char['W'] == 3:
+                if dic_char['1'] == 2 or dic_char['9'] == 2 or dic_char['N'] == 2 or dic_char['W'] == 2 or dic_char['E'] == 2 or dic_char['S'] == 2:
+                    total_pts = 10000
+                    mahjong_name = "ARMONIA CELESTE"
+                    is_classic_bool = True
+
+    
+
+
+    return is_classic_bool, total_pts, mahjong_name, actions
 
 winds = {1 : "E", 2 : "S", 3 : "W", 4 : "N"}
 
@@ -231,22 +318,29 @@ with open(name, "rb") as file:
         lastPiece = line[-1].strip("*")
 
         actions = []
+        name_mahjong = ""
+        is_classic_bool = False
+        linea_to_evaluate = "".join(line)
 
-        for piece in allForOne:
-            piecePoints, action = piece.getPoints(points)
-            points += piecePoints
-            if action != "":
-                actions.append(action)
+        is_classic_bool, points, name_mahjong, actions = is_classic(linea_to_evaluate)
 
-        if chowLess:
-            points += 30
-            actions.append(f"{points} mahjong sin chow 30")
-        else:
-            points += 20
-            actions.append(f"{points} mahjong con chow 20")
+        if not is_classic_bool:
+            for piece in allForOne:
+                piecePoints, action = piece.getPoints(points)
+                points += piecePoints
+                if action != "":
+                    actions.append(action)
+
+            if chowLess:
+                points += 30
+                actions.append(f"{points} mahjong sin chow 30")
+            else:
+                points += 20
+                actions.append(f"{points} mahjong con chow 20")
+            
         
         points += len(flowers) * 4
-
+                    
         actions.append(f"{points} flores: {len(flowers)} para {len(flowers)*4} puntos")
 
         total = points
@@ -287,7 +381,7 @@ with open(name, "rb") as file:
 
         actions.append(f"Total mano: {total_prev} para {total}")
 
-        results.append(f"{entry} | {points} | {doubles} | {total} | TRADICIONAL | {actions}")
+        results.append(f"{entry} | {points} | {doubles} | {total} | {name_mahjong} | {actions}")
 
 if rank != 0:
     comm.send(results, dest=0, tag=rank)

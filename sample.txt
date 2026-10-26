@@ -1,1 +1,8 @@
-1 [E / E] [P9-P9-P9] [P5-P5-P5-P5] [P6-P6-P6] [E-E-E-E] (P1-P1) <G3 G4 R4> *P1*
+1 [N / E] (B1-B1) (B2-B2) (B3-B3) (B4-B4) (B5-B5) (B8-B8) (B9-B9) <G3 G4 R4> *B9*
+2 [E / E] [P1-P2-P3] [P4-P5-P6] [P7-P8-P9] [DB-DB-DB] (E-E) <> *E*
+3 [N / E] (DV-DV) (W-W) (B9-B9) (DB-DB) (C1-C1) (DR-DR) (P9-P9) <> *P9*
+4 [E / E] [B1-B1-B1] [C1-C1-C1] [P1-P1-P1] [P9-P9-P9] (C9-C9) <> *C9*
+5 [E / E] [P2-P3-P4] [P3-P3-P3] [P8-P8-P8] [DV-DV-DV] (P6-P6) <> *P6*
+6 [E / E] [N-N-N] [W-W-W] [E-E-E] [DR-DR-DR] (S-S) <> *S*
+6 [E / E] [N-N-N] [W-W-W] [E-E-E] [S-S-S] (P7-P7) <> *P7*
+7 [E / E] [DV-DV-DV] [DR-DR-DR] [DB-DB-DB] [N-N-N] (C1-C1) <> *C1*

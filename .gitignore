@@ -1,6 +1,9 @@
 #Entrono virtual
 venv/
 
+#Directorios
+__pycache__/
+
 # Variables de entorno y credenciales
 .env
 .env.local
