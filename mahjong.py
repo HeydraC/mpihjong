@@ -168,8 +168,51 @@ def is_classic(line):
                     mahjong_name = "ARMONIA CELESTE"
                     is_classic_bool = True
 
-    
+    #JASPE ROJO
+    if dic_char['['] == 4 and dic_char['('] == 1: #4 pungs/chows y 1 ojo
+        if dic_char['P'] == 11 or dic_char['P'] == 12:
+            if (dic_char['D'] == 3 or dic_char['D'] == 2) and (dic_char['R'] == 3 or dic_char['R'] == 2):
+                if dic_char['1'] + dic_char['5'] + dic_char['7'] + dic_char['9'] == 11 or dic_char['1'] + dic_char['5'] + dic_char['7'] + dic_char['9'] == 12:
+                    total_pts = 15000
+                    mahjong_name = "JASPE ROJO"
+                    is_classic_bool = True
 
+    #BENDICION CELESTIAL
+    if dic_char['['] == 4 and dic_char['('] == 1: #4 pungs/chows y 1 ojo
+        if dic_char['2'] + dic_char['4'] + dic_char['8'] == 9:
+            if dic_char['D'] == 3 and dic_char['B'] == 12:
+                if dic_char['N'] == 2 or dic_char['S'] == 2 or dic_char['E'] == 2 or dic_char['W'] == 2:
+                     total_pts = 15000
+                     mahjong_name = "BENDICION CELESTIAL"
+                     is_classic_bool = True
+
+    #GRAN MURALLA CHINA
+    if dic_char['C'] == 14:
+        if dic_char['1'] + dic_char['3'] + dic_char['5'] + dic_char['7'] + dic_char['9'] == 14:
+            total_pts = 15000
+            mahjong_name = "GRAN MURALLA CHINA"
+            is_classic_bool = True
+
+    #CIUDAD PROHIBIDA
+    if dic_char['C'] + dic_char['R'] == 14:
+        if dic_char['2'] + dic_char['4'] + dic_char['6'] + dic_char['8'] + dic_char['D'] == 14:
+            total_pts = 15000
+            mahjong_name = "CIUDAD PROHIBIDA"
+            is_classic_bool = True
+
+    #GRANDES SAMURAIS
+    if dic_char['('] == 7: #Me asegura 7 pares
+        if dic_char['D'] + dic_char['N'] + dic_char['W'] + dic_char['E'] + dic_char['S'] == 14:
+            total_pts = 20000
+            mahjong_name = "GRANDES SAMURAIS"
+            is_classic_bool = True
+
+    #HIJOS UNIDOS
+    if dic_char['('] == 7: #Me asegura 7 pares
+        if dic_char['1'] + dic_char['9'] == 14:
+            total_pts = 20000
+            mahjong_name = "HIJOS UNIDOS"
+            is_classic_bool = True
 
     return is_classic_bool, total_pts, mahjong_name, actions
 
