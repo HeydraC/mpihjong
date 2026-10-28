@@ -87,7 +87,7 @@ import os
 from datetime import datetime
 from collections import Counter
 
-def is_classic(line):
+def is_classic(line, chowless):
     is_classic_bool = False
 
     #Me quedo solo con la linea del mahjong clasico o limite
@@ -135,8 +135,20 @@ def is_classic(line):
             is_classic_bool = True
 
     #OCULTO
-    if dic_char['['] == 0: #Me garantiza que se hizo en oculto
-        pass
+    if dic_char['['] == 0 and chowLess: #Me garantiza que se hizo en oculto
+        total_pts = 5000
+        mahjong_name = "OCULTO"
+        is_classic_bool = True
+
+    #13 MARAVILLAS
+    if dic_char['['] == 0:
+        if (dic_char['D'] == 3 or dic_char['D'] == 4) and (dic_char['R'] == 1 or dic_char['R'] == 2) and (dic_char['V'] == 1 or dic_char['V']) and (dic_char['B'] == 3 or dic_char['B'] == 4):
+            if (dic_char['N'] == 1 or dic_char['N'] == 2) and (dic_char['E'] == 1 or dic_char['E'] == 2) and (dic_char['W'] == 1 or dic_char['W'] == 2) and (dic_char['S'] == 1 or dic_char['S'] == 2):
+                if (dic_char['1'] == 3 or dic_char['1'] == 4) and (dic_char['9'] == 3 or dic_char['9'] == 4):
+                    total_pts = 2500
+                    mahjong_name = "13 MARAVILLAS"
+                    is_classic_bool = True
+
 
     #JASPE IMPERIAL
     if dic_char['P'] + dic_char['D'] == 14: #Me garntiza que son solo bambus y dragones
@@ -365,7 +377,7 @@ with open(name, "rb") as file:
         is_classic_bool = False
         linea_to_evaluate = "".join(line)
 
-        is_classic_bool, points, name_mahjong, actions = is_classic(linea_to_evaluate)
+        is_classic_bool, points, name_mahjong, actions = is_classic(linea_to_evaluate, chowLess)
 
         if not is_classic_bool:
             for piece in allForOne:
